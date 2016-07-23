@@ -1,2 +1,5 @@
 # Prevent config.json credentials being commited
 config.json
+
+# Don't commit the file which stores the last IP address used
+last-ip.txt

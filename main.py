@@ -1,5 +1,6 @@
 import os, json
 import requests
+import pickle
 from subprocess import Popen, PIPE
 import dns.resolver
 import urllib2
@@ -35,6 +36,16 @@ def get_ip():
 
 if __name__ == "__main__":
     ip = get_ip()
+    
+    with open("last-ip.txt", "r+") as last_ip_file:
+        last_ip = last_ip_file.read()
+        
+        if ip == last_ip:
+            print("IP doesn't changed")
+            quit()
+      
+        last_ip_file.write(ip)
+    
     for domain, sub_domain_names in domains.iteritems():
         zone_id = get_zone_id(domain)
         for name, rec_id in get_record_ids(zone_id, sub_domain_names).items():
