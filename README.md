@@ -4,7 +4,7 @@ Updates the IPs for several DNS records on CloudFlare using their native API
 
 # Howto:
 * `pip install -r requirements.txt`
-* rename options.json.template to options.json
+* copy options.json.template to options.json
 * change options.json
 * run ``python main.py`` to see if it works
 
