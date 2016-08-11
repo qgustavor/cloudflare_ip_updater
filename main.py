@@ -37,14 +37,21 @@ def get_ip():
 if __name__ == "__main__":
     ip = get_ip()
     
-    with open("last-ip.txt", "r+") as last_ip_file:
-        last_ip = last_ip_file.read()
-        
-        if ip == last_ip:
-            print("IP doesn't changed")
-            quit()
+    try:
+        with open("last-ip.txt", "r") as last_ip_file:
+            last_ip = last_ip_file.read()
+            
+            if ip == last_ip:
+                print("IP doesn't changed")
+                quit()
+                
+    except IOError:
+        print "First run, creating last-ip.txt"
       
+    with open("last-ip.txt", "w+") as last_ip_file:
         last_ip_file.write(ip)
+        
+    print("IP changed")
     
     for domain, sub_domain_names in domains.iteritems():
         zone_id = get_zone_id(domain)
